@@ -5,3 +5,38 @@ date:   2019-10-31 12:28:39 +0800
 categories: html
 ---
 
+## css导入方式
+1. `<link rel="stylesheet" href="a.css">`
+2. @import "a.css";
+3. @import 'a.css';
+4. @import url(a.css);
+5. @import url('a.css');
+6. @import url("a.css");
+
+> 注意 分号不能少
+
+## css选择器 
+css选择器是有由基本选择器以及他们的组合方法来实现最终的样式效果
+
+### 基本选择器类型
+1. ID选择器 #id
+2. 类型选择器 .class
+3. 通配选择器 
+4. [属性选择器](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Attribute_selectors
+
+### 组合选择器类型
+兄弟和后代都是关系定位，通过内在的逻辑关系形成定位条件
+1. 合集的组合，selector1，selector
+2. 兄弟（后面的所有的），s1 ~ s2>
+3. 兄弟（后面第一个），s1 + s2
+4. 兄弟（位置在第一个，并且是x），从右往左读 x:first_child>
+5. 兄弟（位置在最后一个，并且是x），从右往左读 x:last_child>
+6. 兄弟 位置在n个，并且是x，从右往左读 x:nth_child>
+7. x类型的兄弟 位置在n个, x:nth_of_type>
+8. 后代（所有的）s1 s2>
+9. 后代（儿子） s1 > s2>
+
+### 选择器扩展
+- 通过伪类，来定义更多的行为，从而来选择更多的元素
+- 通过伪元素，来动态添加，修改当前页面元素，来实现更多的效果
+
