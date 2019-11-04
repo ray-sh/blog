@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "HTML标签探索"
+title:  "CSS总结"
 date:   2019-10-31 12:28:39 +0800
 categories: html
 ---
-
+  
 ## css导入方式
 1. `<link rel="stylesheet" href="a.css">`
 2. @import "a.css";
@@ -22,7 +22,7 @@ css选择器是有由基本选择器以及他们的组合方法来实现最终�
 1. ID选择器 #id
 2. 类型选择器 .class
 3. 通配选择器 
-4. [属性选择器](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Attribute_selectors
+4. [属性选择器](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Attribute_selectors)
 
 ### 组合选择器类型
 兄弟和后代都是关系定位，通过内在的逻辑关系形成定位条件
