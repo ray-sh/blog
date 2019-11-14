@@ -47,4 +47,15 @@ css选择器是有由基本选择器以及他们的组合方法来实现最终�
   - 边框代表一个元素所需要的空间，就像一个个的box
 - 为什么会有margin
   - margin用来表示每个箱子之间的相对距离
-- 盒模型的组成和度量
+- 盒模型的组成
+  - content
+  - padding
+  - border
+  - margin
+- 盒模型的度量
+  - 默认的宽度高度指的是box-sizing:content-box
+  - 也可以指定box-sizing: border-box
+  - padding的度量
+    - padding: 1px 上下左右都是1px
+    - padding: 1em 
+  >While em is relative to the font-size of its direct or nearest parent, rem is only relative to the html (root) font-size
