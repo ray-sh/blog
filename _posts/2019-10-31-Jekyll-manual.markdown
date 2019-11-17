@@ -11,7 +11,8 @@ categories: jekyll update
 
 ## 理解Jekyll的运行原理
 
-Jekyll本质上是一个Ruby的程序，他可以把markdown类型的文本编译成html，加上一定的布局和css，就可以形成blog的website。它本身还包含一个
+Jekyll本质上是一个Ruby的程序，他可以把markdown类型的文本编译成html，加上一定的布局和css，就可以形成blog的website。
+它本身还包含一个
 本地的local web server，用来实时查看编译生成的站点。对Ruby不太理解的新手还是不太容易理解Jekyll。
 
 ### Ruby背景知识介绍
@@ -44,12 +45,21 @@ basic help message containing pointers to more information.
 A file which contains list of gems required for your site.
 
 #### Bundler
-[Bundler manages an application's dependencies through its entire life, across many machines, systematically and repeatably
+[Bundler manages an application's dependencies through its entire life, across many machines, 
+
+systematically and repeatably
 ](https://rubygems.org/gems/bundler)
 
 ## Jekyll目录结构
+```
+
+```
 
 ## Jekyll编译流程
 ## 定制个人的Blog站点
+每个Jekyll的主题都不能100%满足需求，最简单的定制方法就是fork jekyll的themea，然后修改，这种方法可以完全不用搭建本地ruby的环境，直接在github上修改，御览。但是如果要在本地开发调试，仍然需要搭建ruby开发环境。
+
+> ruby gem在中国访问速度较慢，最好是通过代理来访问。
+> 
 
 ## 自动上传Blog到Github
