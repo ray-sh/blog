@@ -30,9 +30,12 @@ rm -rf "_build"
 
 MIX_ENV=prod mix release
 ```
+
 ## 如何部署phoenix application到PASS平台
 最好的方法是dockerlize，这样能构方便的在不同平台迁移，并且很好的规避不同平台的部署差异，缺点是要对docker有一定的了解
+
 > The Dockerfile
+
 ```
 FROM elixir:1.9.0-alpine as build
 
