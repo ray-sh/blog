@@ -1,0 +1,45 @@
+---
+layout: post
+title:  "mnesia"
+date:   2019-11-28 12:28:39 +0800
+categories: mnesia
+---
+
+# mnesia初探
+## 简介
+mnesia是erlang内建的数据库， [mnesia erlang文档](https://erlang.org/doc/man/mnesia.html)，提供了一个DBMS的内置支持， [腾讯文档](https://cloud.tencent.com/developer/section/1124227)
+## 生命周期的管理
+- 启动/停止
+- 备份/恢复
+
+## mnesisa的使用
+- [mnesia使用的封装](https://github.com/beardedeagle/mnesiac)
+- 数据库的创建
+  - [create_shema](https://erlang.org/doc/man/mnesia.html#create_schema-1)
+- Table的创建
+  - 默认情况table的内容只是保存在内存里，可以指定persist参数为disc_copies [Details](https://erlang.org/doc/man/mnesia.html#create_table-2) :mnesia.dirty_read  {MyRecord, 1}  
+- mnesia使用的注意事项
+  - 创建持久化的table可能会遇到的问题 https://elixirforum.com/t/including-mnesia-in-release-without-starting-it/24136
+  - https://elixirforum.com/t/creating-mnesia-tables-with-disc-copies-option/14265
+```
+If Mnesia has already started with :extra_applications, you should run this instead of :create_schema/1:
+
+:mnesia.change_table_copy_type(:schema, node(), :disc_copies)
+Otherwise if you only load :mnesia with :included_applications, then you should run this:
+
+:mnesia.create_schema([node()])
+:mnesia.start()
+After that, :mnesia.create_table/2 should work. Remember to also run :mnesia.wait_for_tables/2 to ensure that the node/cluster is ready.
+
+And as I mentioned in the other thread 13, I believe the error with Mnesia missing from the release is because of a bug in Elixir 1.9.0. 1.9.1 should resolve that.
+  
+我们需要理解Elixir怎么管理applicaiton的启动
+https://www.amberbit.com/blog/2017/9/22/elixir-applications-vs-extra_applications-guide/
+
+I believe there is a chance you wanted to add the library to your list of :applications and not :included_applications. The latter is used only in special circumstances where you depend on it but you don’t want it to start because you will do it yourself.
+
+The general rule is that you should always add a dependency to your :applications list, except the ones you only use during development and test. here is an article on the matter: http://blog.plataformatec.com.br/2016/07/understanding-deps-and-applications-in-your-mixfile/ 152
+
+```
+- 数据的CURD
+- 关联Table的创建

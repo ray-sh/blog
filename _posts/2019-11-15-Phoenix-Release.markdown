@@ -21,7 +21,12 @@ categories: phoenix
 mix deps.get --only prod
 MIX_ENV=prod mix compile
 npm install --prefix ./assets
-#执行webpack脚步
+#执行定义在assets/package.json里面的deploy命令
+#"scripts": {
+#    "deploy": "webpack --mode #production",
+#    "watch": "webpack --mode #development --watch"
+#  },
+#
 npm run deploy --prefix ./assets
 #站点cache
 mix phx.digest
