@@ -16,6 +16,8 @@ mnesia是erlang内建的数据库， [mnesia erlang文档](https://erlang.org/do
 - [mnesia使用的封装](https://github.com/beardedeagle/mnesiac)
 - 数据库的创建
   - [create_shema](https://erlang.org/doc/man/mnesia.html#create_schema-1)
+  - iex(14)>  :mnesia.system_info(:directory)
+  '/home/tom/workdir/jekyll/blog/Mnesia.nonode@nohost'
 - Table的创建
   - 默认情况table的内容只是保存在内存里，可以指定persist参数为disc_copies [Details](https://erlang.org/doc/man/mnesia.html#create_table-2) :mnesia.dirty_read  {MyRecord, 1}  
 - mnesia使用的注意事项
@@ -28,8 +30,13 @@ If Mnesia has already started with :extra_applications, you should run this inst
 Otherwise if you only load :mnesia with :included_applications, then you should run this:
 
 :mnesia.create_schema([node()])
-:mnesia.start()
-After that, :mnesia.create_table/2 should work. Remember to also run :mnesia.wait_for_tables/2 to ensure that the node/cluster is ready.
+:mnesia.start() #schema.dat只会在这个函数调用后生成
+After that, :mnesia.create_table/2 should work.  
+:mnesia.create_table(MyRecord, 
+  disc_copies: [node()],
+  attributes: [:id, :foo, :bar]
+)
+Remember to also run :mnesia.wait_for_tables/2 to ensure that the node/cluster is ready.
 
 And as I mentioned in the other thread 13, I believe the error with Mnesia missing from the release is because of a bug in Elixir 1.9.0. 1.9.1 should resolve that.
   
@@ -42,4 +49,26 @@ The general rule is that you should always add a dependency to your :application
 
 ```
 - 数据的CURD
+```
+iex(8)> :mnesia.dirty_write {MyRecord ,1, 2, 3}
+:ok
+iex(9)> :mnesia.dirty_read {MyRecord ,1}       
+[{MyRecord, 1, 2, 3}]
+iex(10)> :mnesia.dirty_write {MyRecord ,1, 3, 4}
+:ok
+iex(11)> :mnesia.dirty_read {MyRecord ,1}       
+[{MyRecord, 1, 3, 4}]
+iex(12)> :mnesia.dirty_delete {MyRecord, 1}
+:ok
+iex(13)> :mnesia.dirty_read {MyRecord ,1}  
+[]
+```
 - 关联Table的创建
+
+关联表的结构
+
+Person: id, name, age
+
+Employee: Person, depart, salary
+
+- 表结构更新，添加删除某个属性
