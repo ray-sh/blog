@@ -9,6 +9,7 @@ categories:
 - 变量的作用域
   - var定义的变量会在编译的时候提升到最开始
   - 函数里面的变量在编译的时候确定其引用，在执行的时候确定值
+
 ```
 //Block scope
 {{{{var a = 1}}}}
@@ -44,6 +45,7 @@ VM68:31 2
 
   - var是有副作用的，除非有特殊目的，一般用let， 表示不变的常量用const
   - const只能保证变量的ref不被修改
+
 ```
 const a = 1
 a=2//这里会报错，a已经指向1，不能修改它指向2
@@ -51,7 +53,6 @@ a=2//这里会报错，a已经指向1，不能修改它指向2
 const b = [1,2]
 b.push(3)
 //const只能保证b的引用本身不被修改，引用所指向的内容还是可以修改
-
 ```
 ## 函数
 - 不同的函数定义方法会导致this的不同
@@ -99,6 +100,7 @@ f2 {id: "PLAYGROUND"}
 ```
 
 - 箭头函数可以简写
+
 ```
 let add = (a,b) =>{
     return a + b
@@ -108,8 +110,10 @@ let add = (a,b) => a + b
 如果只有一个参数，括号也可以省略
 [1,2].map(x => x + 1)
 ```
+
 ## 对象
 - 不用定义直接生成一个实例对象
+
 ```
 const age = 'age'
 const home='shanghai'
@@ -137,7 +141,9 @@ sayhi: ƒ sayhi()
 sex: "male"
 __proto__: Object
 ```
+
 - 属性的destructure
+
 ```
 const obj = {
   name: "jack",
@@ -180,7 +186,9 @@ function display({name, page, any ...})
 //更方便的引入package
 const {Component, useState} = require('react')
 ```
+
 - 数组的destructure
+
 ```
 //array的deconstruct
 var [a,b] = [1,2,3]
@@ -220,6 +228,7 @@ newarray: (3) [2, 3, 4]
 jack {age: 11, sex: "mail"}
 new person {age: 11, sex: "mail"}
 ```
+
 ## 尽量使用async/wait来处理异步
 
 ```
@@ -236,5 +245,4 @@ const fetchData2 = async() => {
   const data = await resp.json()
   
 }
-
 ```
