@@ -78,10 +78,10 @@ let mul = (a,b) => {
 
 Output
 The this undefined come from caller
-VM96:14 The this undefined come from caller
-VM96:19 The this [object Object] come from funciton self
-VM96:20 xxx
-VM96:23 16
+The this undefined come from caller
+The this [object Object] come from funciton self
+20 xxx
+16
 
 const test = {
   f1: function(){
@@ -105,4 +105,135 @@ let add = (a,b) =>{
 }
 可以简写为
 let add = (a,b) => a + b
+如果只有一个参数，括号也可以省略
+[1,2].map(x => x + 1)
+```
+## 对象
+- 不用定义直接生成一个实例对象
+```
+const age = 'age'
+const home='shanghai'
+const obj = {
+  name: "jack",
+  sayhi() {
+    console.log('hi')
+  },
+  display: () => console.log(name),
+  [age+ "1"]: 42,//[]里面可以放表达式
+  sex: 'male',
+  home//等价 home:home,这种写法更简洁
+}
+
+
+console.log(obj)
+
+output：
+{name: "jack", age1: 42, sex: "male", sayhi: ƒ, display: ƒ, …}
+age1: 42
+display: () => console.log(name)
+home: "shanghai"
+name: "jack"
+sayhi: ƒ sayhi()
+sex: "male"
+__proto__: Object
+```
+- 属性的destructure
+```
+const obj = {
+  name: "jack",
+  sayhi() {
+    console.log('hi')
+  },
+  display: () => console.log(name),
+  age: 42,//[]里面可以放表达式
+  sex: 'male',
+  home: 'home'
+}
+
+function dump(obj){
+ //这种写法更简单，相比较obj.sex, obj.name
+ const {sex,name,home} = obj
+ console.log(name,home,sex)
+}
+dump(obj)
+
+output:
+jack home male
+
+//更简单的写法，有点pattern match的概念
+function dump2({sex,name,home}){
+ console.log(name,home,sex)
+}
+dump2(obj)
+
+const dumpsex = ({sex}) => sex
+
+//甚至可以包含不存在的属性，如果没有找到会返回undefined，也可以个一个默认值
+function dump2({sex,name,home,street='wall'}){
+ console.log(name,home,sex,street)
+}
+//利用该属性可以实现类是key argument
+function display({name, page, any ...})
+{
+
+}
+//更方便的引入package
+const {Component, useState} = require('react')
+```
+- 数组的destructure
+```
+//array的deconstruct
+var [a,b] = [1,2,3]
+console.log(a,b)
+//skip one
+var [a,,b] = [1,2,3]
+console.log(a,b)
+//no match
+const [c,d] = []
+console.log(c,d)
+
+//first and rest, very powerful
+var [a, ...rest] = [1,2,3,4]
+console.log(a,rest)
+//copy rest to new array
+var newarray = [...rest]
+console.log('newarray:', newarray)
+//...rest也可以用在object上
+const person = {
+  name: 'jack',
+  age: 11,
+  sex: 'mail'
+};
+
+var {name, ...rest} = person
+console.log(name, rest)
+//copy一个新的object,过滤调一些属性
+var newPerson = {...rest}
+console.log('new person',newPerson)
+
+output:
+1 2
+1 3
+undefined undefined
+1 (3) [2, 3, 4]
+newarray: (3) [2, 3, 4]
+jack {age: 11, sex: "mail"}
+new person {age: 11, sex: "mail"}
+```
+## 尽量使用async/wait来处理异步
+```
+const fetchData = {} => {
+  fetch('http://api.github.com').then(resp => {
+    resp.json().then(data => {
+      console.log(data)
+    });
+  });
+};
+
+const fetchData2 = async() => {
+  const resp = await fetch('github')
+  const data = await resp.json()
+  
+}
+
 ```
