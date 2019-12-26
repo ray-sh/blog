@@ -221,6 +221,7 @@ jack {age: 11, sex: "mail"}
 new person {age: 11, sex: "mail"}
 ```
 ## 尽量使用async/wait来处理异步
+
 ```
 const fetchData = {} => {
   fetch('http://api.github.com').then(resp => {
