@@ -55,7 +55,7 @@ class Form extends React.Component {
 ```
 
 - http call,使用async, await
-  
+
 ```
 handleSubmit = async (event) => {
   	event.preventDefault();
@@ -63,3 +63,28 @@ handleSubmit = async (event) => {
     console.log(resp.data);
   };
 ```
+
+- useEffect的用法
+
+```
+//useEffect在每次rendering以后都会调用
+useEffect(() => {
+  	if (secondsLeft > 0 && availableNums.length > 0) {
+      //setTimeout让一个函数延时执行，但是也间接创建了一timmer
+      const timerId = setTimeout(() => {
+	      setSecondsLeft(secondsLeft - 1);
+      }, 1000);
+      //return的函数会在下一次render之前执行，用来清除某些side effect
+    	return () => clearTimeout(timerId);
+  	}
+  });
+```
+
+- 通过修改component的key来实现app的reset
+
+React will discard the current App instance and create a new one with a fresh state While this is a nice trick that might reduce the complexity of your app, it is important to remember that this approach makes React discard the entire component instance and DOM tree. In the above example, most of the Chat component will be redrawn anyway on activeChat change, so it might be a good enough solution. On real word applications, you should limit non-list components with keys and avoid setting it on top level ones, as it might be the cause of (hard to spot) performance issues.
+
+- 自定义hook
+
+自定义hook就是一个函数封装，但是他的使用也要准守一定的规则
+https://zh-hans.reactjs.org/docs/hooks-custom.html
