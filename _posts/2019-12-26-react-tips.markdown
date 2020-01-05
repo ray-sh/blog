@@ -88,3 +88,5 @@ React will discard the current App instance and create a new one with a fresh st
 
 自定义hook就是一个函数封装，但是他的使用也要准守一定的规则
 https://zh-hans.reactjs.org/docs/hooks-custom.html
+
+- 不要依赖状态A的更新后的值来更新状态B，React里面状态的更新是无序的，可以通过传入一个函数给setState来实现这个效果
